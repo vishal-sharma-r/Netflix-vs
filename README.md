@@ -8,6 +8,20 @@ Netflix VS
 
     - Login : Redirect to login Page
 
+    -Sign up form
+
+    - Form Validation
+
+    -Using regex
+
+    -useRef Hook()
+
+* Fire base configuration and setup
+* Deploying app to production
+* Create Signup user account
+* 
+
+
 #### -**Browse Page () after authentication**
 
     -Header
