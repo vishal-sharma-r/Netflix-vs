@@ -19,8 +19,10 @@ Netflix VS
 * Fire base configuration and setup
 * Deploying app to production
 * Create Signup user account
-* 
-
+* Implement authentication
+* Created Redux Store and create userSlice
+* Implemente Sign up
+* Update profile
 
 #### -**Browse Page () after authentication**
 

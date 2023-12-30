@@ -1,22 +1,96 @@
 import React, { useRef, useState } from "react";
 import Header from "./Header";
-
 import { checkValidData } from "../utils/validate";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 const Login = () => {
   const [isSignInForm, setIsSignForm] = useState(true);
+  const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
-  const [errorMessage,setErrorMessage]  = useState();
+  const dispatch = useDispatch();
+  const [errorMessage, setErrorMessage] = useState();
+  const navigate = useNavigate();
   const toggleSignForm = () => {
     setIsSignForm(!isSignInForm);
   };
   const handleButtonClick = () => {
-    
     const msg = checkValidData(email.current.value, password.current.value);
-    setErrorMessage(msg); 
+    setErrorMessage(msg);
+    if (msg) return;
+    // Sign Up and Sign in
 
-    // Sign Up and Sign in  
-    
+    if (!isSignInForm) {
+      // Sign up
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          updateProfile(auth.currentUser, {
+            displayName: name.current.value,
+            photoURL:
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdjsWNMQXbE4es6L2ffmBvvClSwjtCe0uYh5xMOeDC5RikVgYlqazRWUeYdg0UGFaBk20&usqp=CAU",
+          })
+            .then(() => {
+              // Profile updated!
+              // ...
+              const { email, uid, displayName, photoURL } = auth.currentUser;
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                })
+              );
+
+              navigate("/browse");
+            })
+            .catch((error) => {
+              // An error occurred
+              // ...
+              setErrorMessage(error.message);
+            });
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + "-" + errorMessage);
+        });
+    } else {
+      // sign in code
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+
+          console.log(user);
+          navigate("/browse");
+
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + "-" + errorMessage);
+        });
+    }
   };
   return (
     <div>
@@ -38,7 +112,8 @@ const Login = () => {
         </h1>
         {!isSignInForm && (
           <input
-            type="password"
+            ref={name}
+            type="text"
             placeholder="Full Name"
             className="p-4 my-4 w-full bg-gray-600 rounded-sm"
           />
