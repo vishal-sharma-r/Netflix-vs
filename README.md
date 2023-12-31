@@ -24,6 +24,10 @@ Netflix VS
 * Implemente Sign up
 * Update profile
 
+* [X] Bug fix redirecting to broese page
+
+* Unsubscribe to onAuthStatteChange callbacks
+
 #### -**Browse Page () after authentication**
 
     -Header

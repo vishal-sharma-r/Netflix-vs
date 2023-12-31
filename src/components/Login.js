@@ -7,9 +7,9 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { BackgroundImage, userAvtar } from "../utils/constants";
 const Login = () => {
   const [isSignInForm, setIsSignForm] = useState(true);
   const name = useRef(null);
@@ -17,7 +17,6 @@ const Login = () => {
   const password = useRef(null);
   const dispatch = useDispatch();
   const [errorMessage, setErrorMessage] = useState();
-  const navigate = useNavigate();
   const toggleSignForm = () => {
     setIsSignForm(!isSignInForm);
   };
@@ -40,7 +39,7 @@ const Login = () => {
           updateProfile(auth.currentUser, {
             displayName: name.current.value,
             photoURL:
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdjsWNMQXbE4es6L2ffmBvvClSwjtCe0uYh5xMOeDC5RikVgYlqazRWUeYdg0UGFaBk20&usqp=CAU",
+            userAvtar+name.current.value,
           })
             .then(() => {
               // Profile updated!
@@ -54,8 +53,6 @@ const Login = () => {
                   photoURL: photoURL,
                 })
               );
-
-              navigate("/browse");
             })
             .catch((error) => {
               // An error occurred
@@ -78,11 +75,7 @@ const Login = () => {
       )
         .then((userCredential) => {
           // Signed in
-          const user = userCredential.user;
-
-          console.log(user);
-          navigate("/browse");
-
+          const user = userCredential.user; 
           // ...
         })
         .catch((error) => {
@@ -97,9 +90,9 @@ const Login = () => {
       <Header />
       <div className="absolute">
         <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/c31c3123-3df7-4359-8b8c-475bd2d9925d/15feb590-3d73-45e9-9e4a-2eb334c83921/IN-en-20231225-popsignuptwoweeks-perspective_alpha_website_large.jpg"
+          src={BackgroundImage}
           alt="NetflixImageLogin"
-          className=""
+          className="brightness-[.5]"
         />
       </div>
 
