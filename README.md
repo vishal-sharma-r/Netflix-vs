@@ -30,24 +30,38 @@ Netflix VS
 
 #### -**Browse Page () after authentication**
 
-* [X] 
-      -Header
 
-    - Main movie
+ -Header
 
-    -going to build
+- Main movie
 
-    - Tmdb site api
+-going to build
+
+- Tmdb site api
+
+-Trailer in background
+
+-Titles and description
+
+-Movie Suggestion
+
+-MoviesList & N-movies
+
+-Custom hook for now playing
+
+-create movieSlice
+
+-update store with movies data
+
+-planning for Main Container & Secondary container
+
+-fetch data for trailer Video
+
+-Update store with Trailer Video Data
+
+-Embeded youtube video & make autoplay at mute
 
 
-
-    -Trailer in background
-
-    -Titles and description
-
-    -Movie Suggestion
-
-    -MoviesList & N-movies
 
 **-NETFLIX VS**
 
