@@ -30,9 +30,16 @@ Netflix VS
 
 #### -**Browse Page () after authentication**
 
-    -Header
+* [X] 
+      -Header
 
     - Main movie
+
+    -going to build
+
+    - Tmdb site api
+
+
 
     -Trailer in background
 
