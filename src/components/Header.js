@@ -61,8 +61,8 @@ const Header = () => {
   };
 
   return (
-    <div className="absolute px-8 py-2 bg-gradient-to-b from-black z-10 w-full flex justify-between items-center">
-      <img src={LOGO} alt="logo" className="w-44" />
+    <div className="absolute px-8 py-2 bg-gradient-to-b from-black z-10 w-full justify-between flex flex-col items-center md:flex-row">
+      <img src={LOGO} alt="logo" className="w-44 mx-auto md:mx-0" />
       {user && (
         <div className="p-2 flex items-center">
           {showGptSerach && (
@@ -86,9 +86,9 @@ const Header = () => {
           <img
             src={user?.photoURL}
             alt="userImage"
-            className="w-10 h-10 rounded-full"
+            className="w-10 h-10 rounded-full hidden md:inline-block"
           />
-          <div className="flex">
+          <div className="flex flex-row">
           {!dropDown && (
             <RiArrowDropDownLine
               size={40}
@@ -104,9 +104,9 @@ const Header = () => {
           
           
             {dropDown && (
-               <div className="absolute top-[4.2rem] right-5 bg-white border rounded-md p-2">
+               <div className="absolute md:top-[4.2rem] md:right-5 bg-white border rounded-md md:p-2 mt-10 md:mt-0">
                <button
-                 className="font-bold text-black"
+                 className="font-bold text-black p-2 md:p-0"
                  onClick={() => handleSignOut()}
                >
                  Sign out
