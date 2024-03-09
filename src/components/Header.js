@@ -7,7 +7,7 @@ import { addUser, removeUser } from "../utils/userSlice";
 import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { LOGO, SUPPORTED_LANGUAGES } from "../utils/constants";
-import { RiArrowDropDownLine } from "react-icons/ri";
+import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
 import { toggleGptSearchView } from "../utils/gptSlice";
 import { changeLanguage } from "../utils/configSlice";
 const Header = () => {
@@ -88,19 +88,30 @@ const Header = () => {
             alt="userImage"
             className="w-10 h-10 rounded-full"
           />
-          <div className="">
+          <div className="flex">
+          {!dropDown && (
             <RiArrowDropDownLine
               size={40}
               color="white"
               onClick={() => setDropDown(!dropDown)}
-            />
+            />)}
+          {dropDown && (
+            <RiArrowDropUpLine
+              size={40}
+              color="white"
+              onClick={() => setDropDown(!dropDown)}
+            />)}
+          
+          
             {dropDown && (
-              <button
-                className="font-bold text-white ml-2"
-                onClick={() => handleSignOut()}
-              >
-                Sign out
-              </button>
+               <div className="absolute top-[4.2rem] right-5 bg-white border rounded-md p-2">
+               <button
+                 className="font-bold text-black"
+                 onClick={() => handleSignOut()}
+               >
+                 Sign out
+               </button>
+             </div>
             )}
           </div>
         </div>
